@@ -3,38 +3,89 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Formulario con Express-Validator</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+      body{
+          align-items: center;
+          padding-top: 40px;
+          padding-bottom: 40px;
+          background-color: antiquewhite;
+      }
+  </style>
   </head>
   <body>
-    <h1>EXPRESS VALIDATOR PARA EL MUNDO</h1>
-    <style>
-        body{
-            align-items: center;
-            padding-top: 40px;
-            padding-bottom: 40px;
-            background-color: antiquewhite;
-        }
 
-    </style>
 <div class="container">
-    <form>
+  <h1>EXPRESS VALIDATOR PARA EL MUNDO</h1>
+  <form action="/registrar" method="post">
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          <label for="nombreyapellido" class="form-label">Nombre Completo</label>
+          <input id="nombreyapellido" name="nombreyapellido" type="text" class="form-control" value="<% if(typeof valores != 'undefined') { %><%= valores.nombreyapellido %><%}%>">
         </div>
         <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1">
+          <label for="email" class="form-label">Email</label>
+          <input id="email" name="email" type="text" class="form-control"  value="<% if(typeof valores != 'undefined') { %><%= valores.email %><%}%>">
         </div>
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        <div class="mb-3">
+          <label for="edad" class="form-label">Edad</label>
+          <input id="edad" name="edad" type="text" class="form-control"  value="<% if(typeof valores != 'undefined') { %><%= valores.edad %><%}%>">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">REGISTRAR</button>
       </form>
+
+      <!-- Mandar los mensajes de validación con EJS template y ALERTS -->
+      <!-- <% if(typeof validaciones != 'undefined') { %>
+        <% validaciones.forEach( (validacion) => { %>
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong><%= validacion.msg %></strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          <%}) %>
+        <%}
+      %> -->
+
+
+      <!-- Mandar los mensajes de validación con EJS template y TOASTS https://youtu.be/hBETsBY3Hlg?list=PLrAw40DbN0l3ZY24DEsp66_jllaWkJaIg-->
+      <!-- <% if(typeof validaciones != 'undefined') { %>
+        <% validaciones.forEach( (validacion) => { %>
+<div class"toast-container">
+  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+   
+    <div class="toast-header">
+      <svg class="bd-placeholder-img rounded me-2"
+      width="20"
+      height="20"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="xMidYMid slice"
+      role="img"
+      focusable="false"
+    >
+      <rect width="100%" height="100%" fill="#007aff"></rect>
+    </svg>
+      <strong class="me-auto">ATENCIÓN</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      <strong><%= validacion.msg %></strong>
+    </div>
+  </div>
 </div>
+          <%}) %>
+        <%}
+      %> -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  
+  <!-- SCRIPT MOSTRADO EN EL VIDEO https://youtu.be/hBETsBY3Hlg?list=PLrAw40DbN0l3ZY24DEsp66_jllaWkJaIg -->
+    <!-- <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+      var toastList = toastElList.map(function(toastEl){
+        return new bootstrap.Toast(toastEl)
+      });
+      toastElList.forEach(toast => toast.show());
+    });
+  </script> -->
   </body>
 </html>
